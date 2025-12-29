@@ -78,10 +78,10 @@ A mini **RAG (Retrieve and Generate)** system that allows users to ask questions
 **Example Query**
 
   _**Question:**_
-              "Who teaches Mowgli the ways of the jungle?"
+              "Who is teacher of  Mowgli?"
               
   _**Answer:**_
-              "Bagheera, the black panther, teaches Mowgli the ways of the jungle and keeps him safe from danger."
+              "Bagheera is Mowgli's teacher. He teaches Mowgli and is very protective of him. He warns Mowgli many times about his enemy, Shere Khan. Bagheera is like a parent to Mowgli, and Mowgli listens to him and respects him."
 
 **Notes**
 
