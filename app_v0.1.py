@@ -11,7 +11,7 @@ client = Groq(api_key = st.secrets["GROQ_API_KEY"]) # API key is stored in secre
 
 # -------- STREAMLIT PAGE SETTINGS --------
 st.set_page_config(page_title="Mini RAG", layout = "centered") # Browser tab title -> Mini RAG and Page layout -> centered
-st.title("Document Q&A (Mini RAG)") # Shows a big heading on the webpage.
+st.title("(RAG_Model)_ Document Q&A") # Shows a big heading on the webpage.
 
 # -------- File Upload --------
 uploaded_file = st.file_uploader(
@@ -65,27 +65,41 @@ if uploaded_file: # Runs only after user uploads a file.
 
     # -------- User Question --------
     query = st.text_input("Ask your question:") # Creates a question input box.
+    # Creates a button labeled "Get Answer" in the Streamlit UI
+    # The button returns True only when it is clicked
+    ask_btn = st.button("Get Answer")
 
-    if query: # Runs only when user asks a question.
-        query_embedding = model.encode([query], convert_to_numpy=True) # Converts question into an embedding.
-        distances, indices = index.search(query_embedding, k=1) # Finds most similar chunk using FAISS.
-
-        context = chunks[indices[0][0]] # Retrieves the best-matched text chunk.
+    if ask_btn and query:
+        with st.spinner("Searching and generating answer..."):
+            query_embedding = model.encode([query], convert_to_numpy=True)  # Converts the user's question into a numerical vector (embedding)
+            # Performs similarity search using FAISS
+            # k=1 means retrieve the single most relevant chunk
+            # distances -> similarity score
+            # indices -> index position of the best matching chunk
+            distances, indices = index.search(query_embedding, k=1)
+            # Retrieves the most relevant text chunk using the FAISS result index
+            context = chunks[indices[0][0]]
 
 # PROMPT CREATION
         prompt = f"""
-Use ONLY the context below to answer.
+You are a knowledgeable AI assistant designed to answer questions strictly
+based on the provided document content.
 
 Context:
 {context}
 
-Question:
+User Question:
 {query}
 
-Instructions:
-- Answer in 3–5 lines
-- If not found, say:
+Guidelines:
+- Use ONLY the information available in the context.
+- Provide a clear, concise, and professional answer.
+- Limit the response to 3–5 well-structured sentences.
+- Do NOT add assumptions or external knowledge.
+- If the answer is not found in the context, reply exactly:
   "The document does not clearly mention this information."
+
+Answer:
 """
 
         response = client.chat.completions.create( # Sends prompt to Groq LLM.
