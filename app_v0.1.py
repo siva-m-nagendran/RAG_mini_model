@@ -64,20 +64,21 @@ if uploaded_file: # Runs only after user uploads a file.
     index.add(embeddings) # Stores all embeddings inside FAISS.
 
     # -------- User Question --------
-    query = st.text_input("Ask your question:") # Creates a question input box.
-    # Creates a button labeled "Get Answer" in the Streamlit UI
-    # The button returns True only when it is clicked
-    ask_btn = st.button("Get Answer")
+    query = st.text_input("Ask your question:")
 
-    if ask_btn and query:
+    # Initialize session state
+    if "ask_clicked" not in st.session_state:
+        st.session_state.ask_clicked = False
+
+    # Button
+    if st.button("Get Answer"):
+        st.session_state.ask_clicked = True
+
+    # Run after button click
+    if st.session_state.ask_clicked and query:
         with st.spinner("Searching and generating answer..."):
-            query_embedding = model.encode([query], convert_to_numpy=True)  # Converts the user's question into a numerical vector (embedding)
-            # Performs similarity search using FAISS
-            # k=1 means retrieve the single most relevant chunk
-            # distances -> similarity score
-            # indices -> index position of the best matching chunk
+            query_embedding = model.encode([query], convert_to_numpy=True)
             distances, indices = index.search(query_embedding, k=1)
-            # Retrieves the most relevant text chunk using the FAISS result index
             context = chunks[indices[0][0]]
 
 # PROMPT CREATION
@@ -110,3 +111,5 @@ Answer:
 # DISPLAY ANSWER
         st.subheader("Answer") # Displays heading.
         st.write(response.choices[0].message.content) # Shows LLM’s final answer.
+# RESET after answer is displayed
+    st.session_state.ask_clicked = False
