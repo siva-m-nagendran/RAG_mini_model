@@ -6,11 +6,19 @@ A mini **RAG (Retrieve and Generate)** system that allows users to ask questions
 
 **Quick Start (one-liner):**
 
-        https://ragminimodel-dpw4bn8yefguvhhztezldd.streamlit.app/
+_📄🤖 Old_Version:_
 
+        https://ragminimodel-dwoq5cdwggvrparzstxtgc.streamlit.app/
+
+_🚀 New_version_0.1 (# Live Demo)_
+
+        https://ragminimodel-5biwrbtnflgtyfvcsyukni.streamlit.app/
+
+        
 **Quick Demo**
 
-<img width="1493" height="762" alt="&#39;The Jungle Book&#39; - Story Query" src="https://github.com/user-attachments/assets/e023e194-4d0b-4b12-9d7a-84538bf79218" />
+<img width="1493" height="813" alt="Screenshot 2025-12-29 at 6 49 27 PM" src="https://github.com/user-attachments/assets/3f960882-9186-4b84-bfbf-a4c88dabadd2" />
+
 
 **Features**
 
@@ -21,6 +29,14 @@ A mini **RAG (Retrieve and Generate)** system that allows users to ask questions
         * Streamlit web app for querying the book.
         * Uses Groq LLM to generate answers from retrieved context.
         * Provides short, concise answers (3–5 lines) only using the story content.
+
+## 📂 Project Structure
+
+        - `app.py` – Initial version (basic RAG flow)
+        - `app_v0.1.py` – Updated version User Input and ask query from the given documents (button-based query handling, improved UX)
+        - `chunk_text.py` – Text chunking logic
+        - `requirements.txt` – Project dependencies
+
 
 **Folder / File Structure**
 
@@ -78,9 +94,11 @@ A mini **RAG (Retrieve and Generate)** system that allows users to ask questions
 **Example Query**
 
   _**Question:**_
+  
               "Who is teacher of  Mowgli?"
               
   _**Answer:**_
+  
               "Bagheera is Mowgli's teacher. He teaches Mowgli and is very protective of him. He warns Mowgli many times about his enemy, Shere Khan. Bagheera is like a parent to Mowgli, and Mowgli listens to him and respects him."
 
 **Notes**
