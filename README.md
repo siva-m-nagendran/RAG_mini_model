@@ -1,16 +1,14 @@
 # RAG_mini_model
 Mini RAG project to query 'The Jungle Book' using embeddings and FAISS.
 
-Mini_RAG - Story Query
-
 A mini RAG (Retrieve and Generate) system that allows users to ask questions about The Jungle Book and get answers generated from the book text using embeddings, FAISS, and a language model.
-
-Quick Demo
-<img width="1493" height="762" alt="&#39;The Jungle Book&#39; - Story Query" src="https://github.com/user-attachments/assets/e023e194-4d0b-4b12-9d7a-84538bf79218" />
 
 Quick Start (one-liner):
 
 https://ragminimodel-dpw4bn8yefguvhhztezldd.streamlit.app/
+
+Quick Demo
+<img width="1493" height="762" alt="&#39;The Jungle Book&#39; - Story Query" src="https://github.com/user-attachments/assets/e023e194-4d0b-4b12-9d7a-84538bf79218" />
 
 Features
 * Extracts text from PDF and cleans it.
@@ -24,16 +22,27 @@ Features
 Folder / File Structure
 
 Mini_RAG/
+
 │
+
 ├── extract_text.py
+
 ├── chunk_text.py
+
 ├── embeddings_store.py
+
 ├── app.py
+
 ├── query_book.py      # Optional / alternative Streamlit app
+
 ├── The-Jungle-Books-text.pdf
+
 ├── book_index.faiss
+
 ├── chunks.npy
+
 ├── requirements.txt
+
 └── README.md
 
 Setup Instructions
@@ -89,4 +98,4 @@ Dependencies
 * FAISS
 * NumPy
 * pdfplumber
-- [ ] Groq Python SDK
+* Groq Python SDK
